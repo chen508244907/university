@@ -13,7 +13,7 @@
 
     </resultMap>
     <select id="selectById" resultMap="d_u" parameterType="int">
-        select u.name,u.pic,d.* from user u,discuss d where d.uid=u.id and d.m3_id=#{id}
+        select u.name,u.pic,d.* from user u,discuss d where d.uid=u.id and d.m3_id=#{id} order by time desc
     </select>
     <select id="getRows" resultType="int" parameterType="int">
         select count(*) from discuss where m3_id=#{id}
