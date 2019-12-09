@@ -32,7 +32,7 @@ public class AlipayUtils {
         alipayRequest.setBizContent("{" +
                 "    \"out_trade_no\":\""+out_trade_no+"\"," +
                 "    \"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +
-                "    \"total_amount\":88.88," +
+                "    \"total_amount\":100000.00," +
                 "    \"subject\":\"会员充值\"," +
                 "    \"body\":\"我这个贼溜\"," +
                 "    \"passback_params\":\"merchantBizType%3d3C%26merchantBizNo%3d2016010101111\"," +

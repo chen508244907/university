@@ -2,6 +2,7 @@ package com.qf.controller;
 
 import com.qf.pojo.*;
 import com.qf.service.*;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,10 @@ public class MenuController {
     }
     @RequestMapping("/selectC23ByC1/{id}")
     public List<Menu2> selectC23ByC1(@PathVariable("id") Integer id){
+
         return menuService.selectC23ByC1(id);
     }
+    @RequiresPermissions(value = {"vip"})
     @RequestMapping("/selectC4ByC3/{id}")
     public Discuss_User selectC4ByC3(@PathVariable("id") Integer id, HttpSession session){
         //修改浏览量、历史记录
@@ -45,8 +48,13 @@ public class MenuController {
         if (user!=null){
             User user1 = userService.selectByName(user.getName());
             int uid=user1.getId();
+            /*System.out.println(uid+"======"+id);*/
             Menu3 menu3=menuService.selectC3ById(id);
-            if (collectService.selectByUidAndM3Id(uid,id)==null){
+            Collect c=new Collect();
+            c.setUid(uid);
+            c.setM3_id(id);
+            c.setSid(1);
+            if (collectService.selectByUidAndM3Id(c)==null){
                 Collect collect=new Collect();
                 collect.setName(menu3.getName3());
                 collect.setM3_id(id);
@@ -66,6 +74,11 @@ public class MenuController {
         du.setRows(num);
         return du;
     }
+    /*@RequiresPermissions(value = {"vip"})*/
+    /*@RequestMapping("/test")
+    public int as(){
+        return 0;
+    }*/
     //后台查询视频相关数据
     @RequestMapping("/houtaisp/{size}/{page}")
     public Sp houtaisp(@PathVariable("size") Integer size, @PathVariable("page") Integer page){
@@ -80,13 +93,13 @@ public class MenuController {
     //后台新增
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public int addM34(@RequestBody M3m4 m3m4){
-        System.out.println(m3m4+"===========");
+        /*System.out.println(m3m4+"===========");*/
         m3m4.setTime(new Date());
         return menuService.addM3m4(m3m4);
     }
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public int edit(@RequestBody Menu3 menu3){
-        System.out.println(menu3+"+++++++++++");
+        /*System.out.println(menu3+"+++++++++++");*/
         return menuService.edit(menu3);
     }
     @RequestMapping(value = "/findOne",method = RequestMethod.POST)

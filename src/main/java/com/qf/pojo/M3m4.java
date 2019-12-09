@@ -14,7 +14,7 @@ public class M3m4 {
     private Integer m2_id;
     private String pic;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date time;
     private String prief;
     private String target;

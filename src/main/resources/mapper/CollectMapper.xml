@@ -4,12 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.CollectMapper">
     <select id="selectByUidAndM3Id" parameterType="int" resultType="collect">
-        select * from collect where uid=#{uid} and m3_id=#{id}
+        select * from collect where uid=#{uid} and m3_id=#{m3_id} and sid=#{sid}
     </select>
     <insert id="add" parameterType="collect">
-        insert into collect values (#{name},#{url},#{uid},#{m3_id},#{sid})
+        insert into collect(name,url,uid,m3_id,sid) values (#{name},#{url},#{uid},#{m3_id},#{sid})
     </insert>
-    <select id="findall" parameterType="int" resultType="collect">
+    <resultMap id="c1" type="collect">
+        <result column="name" property="name"></result>
+        <result column="url" property="url"></result>
+        <result column="uid" property="uid"></result>
+        <result column="m3_id" property="m3_id"></result>
+        <result column="sid" property="sid"></result>
+    </resultMap>
+    <select id="findall" parameterType="collect" resultMap="c1">
         select * from collect where uid=#{uid} and sid=#{sid}
     </select>
     <delete id="del" parameterType="int">

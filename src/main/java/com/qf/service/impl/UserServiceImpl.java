@@ -4,10 +4,7 @@ import com.qf.mapper.CollectMapper;
 import com.qf.mapper.DiscussMapper;
 import com.qf.mapper.UserMapper;
 import com.qf.mapper.UserRepository;
-import com.qf.pojo.Msg;
-import com.qf.pojo.Permission;
-import com.qf.pojo.User;
-import com.qf.pojo.UserRoler;
+import com.qf.pojo.*;
 import com.qf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -100,5 +97,16 @@ private CollectMapper collectMapper;
     @Override
     public int updateUserRoler(Integer uid) {
         return userMapper.updateUserRoler(uid);
+    }
+
+    @Override
+    public UserMsg findUr(Integer id) {
+        return userMapper.findUr(id);
+    }
+
+    @Override
+    public int edit(User user) {
+
+        return userMapper.edit(user);
     }
 }

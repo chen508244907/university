@@ -1,9 +1,6 @@
 package com.qf.controller;
 
-import com.qf.pojo.Collect;
-import com.qf.pojo.Discuss;
-import com.qf.pojo.Menu3;
-import com.qf.pojo.User;
+import com.qf.pojo.*;
 import com.qf.service.DiscussService;
 import com.qf.service.MenuService;
 import com.qf.service.UserService;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/discuss")
@@ -39,6 +37,14 @@ public class DiscussController {
             return discussService.add(discuss);
         }
         return -1;
+    }
+    @RequestMapping("/findall/{id}")
+    public Discuss_User findall(@PathVariable("id") Integer id){
+        Discuss_User discuss_user=new Discuss_User();
+        List<Discuss> discusses = discussService.selectById(id);
+        discuss_user.setRows(discussService.getRows(id));
+        discuss_user.setList(discusses);
+        return discuss_user;
     }
 }
 

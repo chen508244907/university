@@ -13,8 +13,8 @@ public class CollectServiceImpl implements CollectService {
     @Autowired
     private CollectMapper collectMapper;
     @Override
-    public Collect selectByUidAndM3Id(Integer uid, Integer id) {
-        return collectMapper.selectByUidAndM3Id(uid,id);
+    public Collect selectByUidAndM3Id(Collect collect) {
+        return collectMapper.selectByUidAndM3Id(collect);
 
     }
 
@@ -25,6 +25,9 @@ public class CollectServiceImpl implements CollectService {
 
     @Override
     public List<Collect> findall(Integer uid, Integer sid) {
-        return collectMapper.findall(uid,sid);
+        Collect collect =new Collect();
+        collect.setUid(uid);
+        collect.setSid(sid);
+        return collectMapper.findall(collect);
     }
 }

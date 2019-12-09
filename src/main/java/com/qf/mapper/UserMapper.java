@@ -2,6 +2,7 @@ package com.qf.mapper;
 
 import com.qf.pojo.Permission;
 import com.qf.pojo.User;
+import com.qf.pojo.UserMsg;
 import com.qf.pojo.UserRoler;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,4 +33,8 @@ public interface UserMapper {
     UserRoler selectRoler(Integer id);//根据用户id查找相关权限
 
     int updateUserRoler(Integer uid);//根据用户id修改权限
+
+    UserMsg findUr(Integer id);//根据用户id查询用户相关信息
+
+    int edit(User user);
 }

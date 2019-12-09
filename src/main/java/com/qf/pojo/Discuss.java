@@ -12,7 +12,7 @@ public class Discuss {
     private Integer m3_id;
     private Integer uid;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date time;
     private String pic;//用户头像
     private String name;//用户名

@@ -1,9 +1,6 @@
 package com.qf.service;
 
-import com.qf.pojo.Msg;
-import com.qf.pojo.Permission;
-import com.qf.pojo.User;
-import com.qf.pojo.UserRoler;
+import com.qf.pojo.*;
 
 import java.util.List;
 
@@ -31,4 +28,8 @@ public interface UserService {
     UserRoler selectRoler(Integer id);//查看用户权限
 
     int updateUserRoler(Integer uid);//修改用户权限
+
+    UserMsg findUr(Integer id);
+
+    int edit(User user);
 }

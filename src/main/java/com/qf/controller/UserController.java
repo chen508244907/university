@@ -2,9 +2,9 @@ package com.qf.controller;
 
 import com.qf.pojo.Msg;
 import com.qf.pojo.User;
+import com.qf.pojo.UserMsg;
 import com.qf.pojo.UserRoler;
 import com.qf.service.UserService;
-import com.qf.utils.UploadUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -16,16 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UploadUtils uploadUtils;
-    @Value("${qiniu.url}")
-    private String url;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -118,10 +113,10 @@ public class UserController {
     @ResponseBody
     public String YZM(HttpSession session) throws Exception {
         //获取用户
-        User usersss=new User();
-        usersss.setName("admin");
-        usersss.setEmail("2067094042@qq.com");
-        session.setAttribute("user",usersss);
+//        User usersss=new User();
+//        usersss.setName("admin");
+//        usersss.setEmail("2067094042@qq.com");
+//        session.setAttribute("user",usersss);
         User user = (User)session.getAttribute("user");
         //根据名字获取用户邮箱
         String name = user.getName();
@@ -141,5 +136,40 @@ public class UserController {
         javaMailSender.send(simpleMailMessage);
         System.out.println(s);
         return s;
+    }
+    @RequestMapping("/selectone")
+    public UserMsg findone(HttpSession session){
+        User user = (User) session.getAttribute("user");
+
+        if (user!=null){
+            User user1 = userService.selectByName(user.getName());
+            UserMsg ur = userService.findUr(user1.getId());
+            /*System.out.println(ur+"====");*/
+            if (ur.getRid()==1){
+                ur.setName("NORMAL "+ur.getName());
+
+            }else if(ur.getRid()==2){
+                ur.setName("VIP "+ur.getName());
+            }else {
+                ur.setName("SVIP "+ur.getName());
+            }
+           /* System.out.println(ur+"==================");*/
+
+            return ur;
+        }
+        return null;
+    }
+    @RequestMapping(value = "edit",method = RequestMethod.POST)
+    public int edit(User user,HttpSession session){
+        User user1 = (User) session.getAttribute("user");
+
+
+        if (user1!=null) {
+            User user2 = userService.selectByName(user1.getName());
+            user.setId(user2.getId());
+            return userService.edit(user);
+        }
+        else
+            return 0;
     }
 }

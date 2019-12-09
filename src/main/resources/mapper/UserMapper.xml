@@ -13,7 +13,7 @@
         insert into user_roler(uid,rid) values (#{uid},#{rid})
     </insert>
     <select id="selectById" parameterType="int" resultType="permission">
-        SELECT r.roler FROM USER u,user_roler ur,roler r WHERE u.id=ur.uid AND ur.rid=r.rid AND uid=#{id}
+        SELECT r.roler FROM user u,user_roler ur,roler r WHERE u.id=ur.uid AND ur.rid=r.rid AND uid=#{id}
     </select>
     <select id="selectByName" parameterType="String" resultType="user">
         select * from user where name=#{name}
@@ -41,6 +41,22 @@
         select * from user_roler where uid=#{id}
     </select>
     <update id="updateUserRoler" parameterType="int">
-        update user_roler set rid=3 where uid=#{uid}
+        update user_roler set rid=2 where uid=#{uid}
+    </update>
+    <select id="findUr" parameterType="int" resultType="com.qf.pojo.UserMsg">
+        select u.name,u.pic,r.rid from user u,user_roler r where u.id=#{id} and u.id=r.uid
+    </select>
+    <update id="edit" parameterType="user">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="pic!=null">
+                pic=#{pic},
+            </if>
+            <if test="pass!=null">
+                pass=#{pass},
+            </if>
+
+        </trim>
+        where id=#{id}
     </update>
 </mapper>

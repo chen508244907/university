@@ -5,7 +5,7 @@ import com.qf.pojo.Collect;
 import java.util.List;
 
 public interface CollectService {
-    Collect selectByUidAndM3Id(Integer uid, Integer id);
+    Collect selectByUidAndM3Id(Collect collect);
 
     int add(Collect collect);
 

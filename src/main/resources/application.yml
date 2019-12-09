@@ -1,16 +1,32 @@
 server:
   port: 8001
 spring:
+ #邮箱配置
+  mail:
+    port: 587
+    host: smtp.qq.com
+    username: 1539429627@qq.com
+   #QQ邮箱的授权码
+    password: fbmtjksiwwxbgbej
+    default-encoding: UTF-8
+    properties:
+      mail:
+          properties:
+            mail:
+              smtp:
+                localhost: localhost
+                auth: true
+                starttls:
+                  enable: true
+                  required: true
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/zls?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://47.105.179.209:3306/zls?useUnicode=true&characterEncoding=utf8
     username: root
     driver-class-name: com.mysql.jdbc.Driver
     password: 123456
-qiniu:
-  accessKey: 3345er4jvn4W80gAnxb1yTKHENTOEX763lNEWMF4
-  secretKey: 6aLBb0yeo2W5nI1D4r0aph7IrPAEjc5521UY3opg
-  bucket: lsq
-  url: http://q1bab6q1w.bkt.clouddn.com/
+spring.servlet.multipart.maxFileSize: 10000MB
+spring.servlet.multipart.maxRequestSize: 10000MB
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.qf.pojo
+

@@ -29,7 +29,8 @@ public class MyRealm extends AuthorizingRealm {
         String primaryPrincipal = (String)principals.getPrimaryPrincipal();
         User user=new User();
         user.setName(primaryPrincipal);
-        Integer id=userService.findOne(user).getId();
+        /*System.out.println(user+"=========");*/
+        Integer id=userService.selectByName(user.getName()).getId();
         List<Permission> permissions = userService.selectById(id);
         if(permissions!=null && permissions.size()!=0){
             Collection collection = new HashSet();

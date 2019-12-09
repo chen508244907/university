@@ -7,11 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface CollectMapper {
-    Collect selectByUidAndM3Id(Integer uid, Integer id);
+    Collect selectByUidAndM3Id(Collect collect);
 
     int add(Collect collect);
 
-    List<Collect> findall(Integer uid, Integer sid);
+    List<Collect> findall(Collect collect);
 
     int del(Integer id);
 
